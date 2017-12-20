@@ -19,11 +19,12 @@ describe("Thermostat", function(){
     expect(thermostat.currentTemp()).toEqual(19);
   });
 
-  it ('checks if minimum temperature is 10 celcius', function(){
-    for (i = 0; i < 10; i++) {
-      thermostat.down();
+  it ('checks if temperature can\'t be greter than max temperature', function(){
+    for (i = 0; i < thermostat.maxTemp; i++) {
+      thermostat.up();
     }
-    expect(thermostat.currentTemp()).toEqual(thermostat.minimumTemp);
+    thermostat.up();
+    expect(thermostat.currentTemp()).toEqual(thermostat.maxTemp);
   });
 
   it ('checks if temperature can\'t be lower than 10', function(){
@@ -34,9 +35,20 @@ describe("Thermostat", function(){
     expect(thermostat.currentTemp()).toEqual(10);
   });
 
+  describe("PSM", function(){
 
 
-  // it ('PSM is on by default', function(){
-  //   expect(thermostat.)
-  // });
+    it ('PSM is on by default', function(){
+      expect(thermostat.psmMode).toEqual(true)
+    });
+
+    it ('cannot exceed 32 degrees when PSM is OFF', function(){
+       thermostat.psmMode = false
+      for (i = 0; i < 12; i++) {
+        thermostat.up();
+      }
+      thermostat.up();
+      expect(thermostat.currentTemp()).toEqual(32)
+    })
+  })
 });
