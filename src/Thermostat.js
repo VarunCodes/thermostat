@@ -1,14 +1,18 @@
-// 'use strict';
+'use strict';
 
-function Thermostat(defaultTemperature = 20) {
-  this.temperature = defaultTemperature;
+function Thermostat(){
+  this.temp = 20;
 };
 
+Thermostat.prototype.currentTemp = function(){
+  return this.temp;
+};
 
-Thermostat.prototype.temperatureUp = function() {
-  this.temperatue++;
-}
+Thermostat.prototype.up = function(){
+  this.temp += 1;
+};
 
-Thermostat.prototype.temperatureDown = function() {
-  this.temperatue--;
-}
+Thermostat.prototype.down = function(){
+  this.temp -= 1;
+
+};
