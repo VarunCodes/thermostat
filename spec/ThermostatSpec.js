@@ -38,7 +38,7 @@ describe("Thermostat", function(){
   describe("PSM", function(){
 
 
-    it ('PSM is on by default', function(){
+    it ('on by default', function(){
       expect(thermostat.psmMode).toEqual(true)
     });
 

@@ -2,7 +2,7 @@
 
 function Thermostat(){
   this.temp = 20;
-  this.minTemp = 10;
+  this.MINIMUM_TEMP = 10;
   this.maxTemp = 25;
   this.psmMode = true
 };
@@ -10,6 +10,10 @@ function Thermostat(){
 Thermostat.prototype.currentTemp = function(){
   return this.temp;
 };
+
+Thermostat.prototype.isMinimumTemp = function() {
+  return this.temp === this.MINIMUM_TEMP;
+}
 
 Thermostat.prototype.up = function(){
   if (this.psmMode === false)
@@ -26,10 +30,10 @@ Thermostat.prototype.up = function(){
 };
 
 Thermostat.prototype.down = function(){
-  if (this.temp > this.minTemp) {
-  this.temp -= 1;
+  if (this.isMinimumTemp()) {
+  return;
 } else {
-  this.temp = 10;
+  this.temp -= 1;
 }
 
 Thermostat.prototype.psm = function(psm){
@@ -39,9 +43,5 @@ Thermostat.prototype.psm = function(psm){
     this.maxTemp = 25
   }
  }
-
-
-
-
 
 };
