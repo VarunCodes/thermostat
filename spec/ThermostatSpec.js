@@ -10,7 +10,11 @@ describe("Thermostat", function(){
   });
 
   it ('up() increases the temperature by 1', function(){
+    // console.log(thermostat.isPowerSavingModeOn())
+    console.log(thermostat);
+
     thermostat.up();
+    console.log(thermostat.currentTemp());
     expect(thermostat.currentTemp()).toEqual(21);
   });
 
@@ -19,13 +23,13 @@ describe("Thermostat", function(){
     expect(thermostat.currentTemp()).toEqual(19);
   });
 
-  it ('checks if temperature can\'t be greter than max temperature', function(){
-    for (i = 0; i < thermostat.maxTemp; i++) {
-      thermostat.up();
-    }
-    thermostat.up();
-    expect(thermostat.currentTemp()).toEqual(thermostat.maxTemp);
-  });
+  // it ('checks if temperature can\'t be greter than max temperature', function(){
+  //   for (i = 0; i < thermostat.maxTemp; i++) {
+  //     thermostat.up();
+  //   }
+  //   thermostat.up();
+  //   expect(thermostat.currentTemp()).toEqual(thermostat.maxTemp);
+  // });
 
   it ('checks if temperature can\'t be lower than 10', function(){
     for (i = 0; i < 10; i++) {
@@ -48,19 +52,38 @@ describe("Thermostat", function(){
     });
 
     it ('can be toggled on and off', function(){
+      console.log(thermostat)
       thermostat.switchPowerSavingModeOff();
       expect(thermostat.isPowerSavingModeOn()).toBe(false);
       thermostat.switchPowerSavingModeOn();
       expect(thermostat.isPowerSavingModeOn()).toBe(true);
     })
 
-    it ('cannot exceed 32 degrees when PSM is OFF', function(){
-       thermostat.psmMode = false
-      for (i = 0; i < 12; i++) {
-        thermostat.up();
-      }
-      thermostat.up();
-      expect(thermostat.currentTemp()).toEqual(32)
+    // it ('cannot exceed 32 degrees when PSM is OFF', function(){
+    //    thermostat.psmMode = false
+    //   for (i = 0; i < 12; i++) {
+    //     thermostat.up();
+    //   }
+    //   thermostat.up();
+    //   expect(thermostat.currentTemp()).toEqual(32)
+    // })
+
+    describe('when power saving mode is on', function() {
+      it('has a maximum temperature of 25 celcius', function(){
+        for (i = 0; i < 7; i++) {
+          thermostat.up();
+        }
+        expect(thermostat.currentTemp()).toEqual(25);
+      })
+    })
+    describe('when power saving mode is off', function() {
+      it('has a maximum temperature of 32 celcius', function(){
+        thermostat.switchPowerSavingModeOff();
+        for (i = 0; i < 15; i++) {
+          thermostat.up();
+        }
+        expect(thermostat.currentTemp()).toEqual(32);
+      })
     })
   })
 });
