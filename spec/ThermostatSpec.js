@@ -5,16 +5,16 @@ describe("Thermostat", function(){
     thermostat = new Thermostat();
   });
 
-  it ('has a default of 20 celcuis', function(){
+  it ('default of 20 celcuis', function(){
     expect(thermostat.currentTemp()).toEqual(20);
   });
 
-  it ('can increase the temperature by 1', function(){
+  it ('up() increases the temperature by 1', function(){
     thermostat.up();
     expect(thermostat.currentTemp()).toEqual(21);
   });
 
-  it ('can decrease the temperature by 1', function(){
+  it ('down() decreases the temperature by 1', function(){
     thermostat.down();
     expect(thermostat.currentTemp()).toEqual(19);
   });
@@ -39,8 +39,20 @@ describe("Thermostat", function(){
 
 
     it ('on by default', function(){
-      expect(thermostat.psmMode).toEqual(true)
+      expect(thermostat.isPowerSavingModeOn()).toBe(true)
     });
+
+    it ('can be switched off', function(){
+      thermostat.switchPowerSavingModeOff();
+      expect(thermostat.isPowerSavingModeOn()).toBe(false);
+    });
+
+    it ('can be toggled on and off', function(){
+      thermostat.switchPowerSavingModeOff();
+      expect(thermostat.isPowerSavingModeOn()).toBe(false);
+      thermostat.switchPowerSavingModeOn();
+      expect(thermostat.isPowerSavingModeOn()).toBe(true);
+    })
 
     it ('cannot exceed 32 degrees when PSM is OFF', function(){
        thermostat.psmMode = false
