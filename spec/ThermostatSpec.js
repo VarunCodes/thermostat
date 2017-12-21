@@ -10,11 +10,12 @@ describe("Thermostat", function(){
   });
 
   it ('up() increases the temperature by 1', function(){
+    console.log(thermostat)
+    // debugger;
     // console.log(thermostat.isPowerSavingModeOn())
-    console.log(thermostat);
-
+    // thermostat.down();
+    // thermostat.up();
     thermostat.up();
-    console.log(thermostat.currentTemp());
     expect(thermostat.currentTemp()).toEqual(21);
   });
 
