@@ -39,6 +39,14 @@ describe("Thermostat", function(){
     expect(thermostat.currentTemp()).toEqual(10);
   });
 
+  it('can be reset to default temperature', function(){
+    for (i = 0; i < 6; i++) {
+      thermostat.up();
+    }
+    thermostat.resetTemp();
+    expect(thermostat.currentTemp()).toEqual(20);
+  });
+
   describe("PSM", function(){
 
 

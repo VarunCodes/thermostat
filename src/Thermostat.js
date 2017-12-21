@@ -1,11 +1,13 @@
 'use strict';
 
 function Thermostat(){
-  this.temp = 20;
+  this.DEFAULT_TEMP = 20;
+  this.temp = this.DEFAULT_TEMP;
   this.MINIMUM_TEMP = 10;
   this.powerSavingMode = true;
   this.MAX_LIMIT_PSM_ON = 25;
   this.MAX_LIMIT_PSM_OFF = 32;
+
 }
 
 Thermostat.prototype.currentTemp = function() {
@@ -24,7 +26,6 @@ Thermostat.prototype.isMaximumTemp = function() {
   return this.temp === this.MAX_LIMIT_PSM_ON;
 }
 };
-
 
 Thermostat.prototype.up = function() {
   if (this.isMaximumTemp()) {
@@ -51,4 +52,8 @@ Thermostat.prototype.switchPowerSavingModeOff = function() {
 Thermostat.prototype.switchPowerSavingModeOn = function() {
   this.powerSavingMode = true;
 };
+
+Thermostat.prototype.resetTemp = function() {
+  this.temp = this.DEFAULT_TEMP;
+}
 };
